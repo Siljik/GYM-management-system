@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Gym Website</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+<body style="background-color:black;">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+     <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/tutorial">Home</a></li>
+          <li><a class="nav-link scrollto" href="/user_about">About</a></li>
+          <li><a class="nav-link scrollto" href="/user_contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="/view_video">View Video</a></li>
+          <li class="dropdown"><a href="#"><span>More Details</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+
+                <li><a href="/profile">profile</a></li>
+              <li><a href="/attendance">GYM Member Attendance</a></li>
+                <li><a href="/attendence_details">Attendence Details</a></li>
+
+            </ul>
+          </li>
+         <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      {% if  request.user.is_authenticated %}
+      <a href="suppliments" class="get-started-btn scrollto">Suppliments</a>
+      {% endif %}
+    </div>
+  </header><!-- End Header -->
+
+<div class="container mt-5">
+    <div class="row">
+    <div class="col-md-4">
+<div class="container mt-5">
+
+
+<div class="row">
+    {%for i in posts %}
+    <form method="post" action="update_profile">
+{% csrf_token %}
+
+    <div class="col-md-12">
+              <label style="color:white;text-align:left;">Name</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="fname"
+                    value="{{i.FullName}}"
+                    placeholder="Enter Your Full Name"
+                    onkeypress="return allowOnlyLetters(event,this);"
+                    required
+                  />
+                </div>
+         <label style="color:white;text-align:left;">Email</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control mt-2"
+                        name="email"
+                        value="{{user.email}}"
+                        placeholder="Enter Your Email"
+                        readonly
+                        required
+                      />
+                    </div>
+             <label style="color:white;text-align:left;">Gender</label>
+        <br>
+<select name="gender">
+    <option value="{{i.Gender}}">{{i.Gender}}</option>
+    <option value="gender">Male</option>
+    <option value="gender">Female</option>
+</select>
+        <br>
+
+
+             <label style="color:white;text-align:left;">Phone number</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control mt-2"
+                        value="{{user.username}}"
+                        name="PhoneNumber"
+
+                        placeholder="Enter Your Number"
+
+                        required
+                      />
+                    </div>
+             <label style="color:white;text-align:left;">Date of birth</label>
+                <div class="form-group">
+
+                  <input type="date"
+
+                    class="form-control mt-2"
+                    name="DOB"
+                    placeholder="Date Of Birth"
+                    required
+                     value="{{ i.DOB}}"
+                    max="2018-12-31"
+
+                  />
+                </div>
+                           <label style="color:white;text-align:left;">Address</label>
+                            <div class="form-group">
+                                <input
+                                  type="text"
+                                  class="form-control mt-2"
+                                  name="address"
+                                  placeholder="Address"
+                                  value="{{i.Address}}"
+
+                                />
+                              </div>
+
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning mt-2">Update</button>
+        </div>
+        </form>
+
+    </div>
+
+  {% endfor %}
+  </div>
+</div>
+    </div>
+    </div>
+</div>
+
+
+<script>
+    function ValidateEmail(mail){
+    	//  alert("You have entered an invalid email address!")
+    	if (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(mail.value)){
+    		return (true);
+    	}
+    	alert("You have entered an invalid email address!");
+    	return (false);
+	}
+	function phonenumber(inputtxt)
+{
+  var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if((inputtxt.value.match(phoneno))
+        {
+      return true;
+        }
+      else
+        {
+        alert("message");
+        return false;
+        }
+}
+	function successfull(inputtxt){
+		//alert('here')
+        	alert("Invalid phone Number");
+        	return false;
+        }
+	}
+</script>
+<script language="Javascript" type="text/javascript">
+
+function allowOnlyLetters(e, t)
+{
+   if (window.event)
+   {
+      var charCode = window.event.keyCode;
+   }
+   else if (e)
+   {
+      var charCode = e.which;
+   }
+   else { return true; }
+   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+       return true;
+   else
+   {
+      alert("Please enter only alphabets");
+      return false;
+   }
+
+}
+function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+</script>
+
+
+
+
+<script>
+    function ValidateEmail(mail){
+    	//  alert("You have entered an invalid email address!")
+    	if (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(mail.value)){
+    		return (true);
+    	}
+    	alert("You have entered an invalid email address!");
+    	return (false);
+	}
+	function phonenumber(inputtxt)
+{
+  var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if((inputtxt.value.match(phoneno))
+        {
+      return true;
+        }
+      else
+        {
+        alert("message");
+        return false;
+        }
+}
+	function successfull(inputtxt){
+		//alert('here')
+        	alert("Invalid phone Number");
+        	return false;
+        }
+	}
+</script>
+<script language="Javascript" type="text/javascript">
+
+function allowOnlyLetters(e, t)
+{
+   if (window.event)
+   {
+      var charCode = window.event.keyCode;
+   }
+   else if (e)
+   {
+      var charCode = e.which;
+   }
+   else { return true; }
+   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+       return true;
+   else
+   {
+      alert("Please enter only alphabets");
+      return false;
+   }
+
+}
+function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+
+
+</script>
+
+</body>
+</html>

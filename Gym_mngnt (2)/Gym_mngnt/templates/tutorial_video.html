@@ -1,0 +1,43 @@
+{%extends 'user_base.html' %}
+{% load static %}
+{% block body %}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1>Let's Workout <span>.</span></h1><br>
+          
+<!--          <h2>Join S.K Azwa Fitness </h2>-->
+        </div>
+      </div>
+
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        {% for i in videos %}
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-store-line"></i>
+            <h3><a href="">{{ i.video_title }}</a></h3>
+            <h2>&#8377;{{i.payment}}</h2>
+          </div>
+        </div>
+
+        <form method="post"action="add_to_paymnet_videos" >
+            {% csrf_token %}
+            <input type="hidden" value="{{ i.video_title}}" name="v_title">
+            <input type="hidden" value="{{i.video}}" name="video"readonly>
+            <input type="hidden" value="{{i.category}}" name="category"readonly>
+            <input type="hidden" value="{{ i.payment }}" name="price"readonly>
+            <input type="submit" value="Buy" class="btn btn-warning">
+        </form>
+        {% endfor %}
+        
+   
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+{% endblock  %}

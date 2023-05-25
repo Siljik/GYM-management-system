@@ -1,0 +1,36 @@
+{%extends 'user_base.html' %}
+{% load static %}
+{% block body %}
+
+
+ <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+<!--      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">-->
+
+<!--      </div>-->
+
+         <h3 style="color:yellow;" ><b>ABOUT US</b></h3>
+     <p style="color:white;">Formed with a vision to encourage and inspire people to adopt a healthy lifestyle. Our gym helps you in identifying the best types of workouts that can help you reach your fitness goals. Having a personal trainer by your side can provide the motivation, energy and encouragement you need to jumpstart your routine. So if you are working hard and still not seeing results, don’t lose hope. Our enthusiastic and knowledgeable team can help you achieve your fitness goals and motivate you to live a healthy lifestyle by providing bespoke fitness strategies and nutritional food supplements tailored to your requirements.</p>
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+          <h3 style="color:yellow;" ><b>BEST PERSONAL TRAINERS</b></h3>
+        {% for i in c %}
+        <div class="col-xl-2 col-md-4">
+          <div >
+
+              <img src="./media/{{i.trainer_img}}" width="170" height="170" >
+            <h6>{{i.name}}</h6>
+<!--            <h2>{{i.gender}}</h2>-->
+<!--            <h2>{{i.phone}}</h2>-->
+
+          </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+{% endblock %}

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Gym Website</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+<body style="background-color:black;">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+     <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/tutorial">Home</a></li>
+          <li><a class="nav-link scrollto" href="/user_about">About</a></li>
+          <li><a class="nav-link scrollto" href="/user_contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="/view_video">View Video</a></li>
+          <li class="dropdown"><a href="#"><span>More Details</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+
+                <li><a href="/profile">profile</a></li>
+              <li><a href="/attendance">GYM Member Attendance</a></li>
+                <li><a href="/attendence_details">Attendence Details</a></li>
+
+            </ul>
+          </li>
+         <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      {% if  request.user.is_authenticated %}
+      <a href="suppliments" class="get-started-btn scrollto">Suppliments</a>
+      {% endif %}
+    </div>
+  </header><!-- End Header -->
+
+<div class="container mt-5">
+    <div class="row">
+    <div class="col-md-4">
+<div class="container mt-5">
+
+
+<div class="row">
+    {%for i in posts %}
+
+    <div class="col-md-12" >
+              <label style="color:white;text-align:left;">Name</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="FullName"
+                    placeholder="Enter Your Full Name"
+                    value="{{i.FullName}}"
+                    required
+                    readonly
+                  />
+                </div>
+         <label style="color:white;text-align:left;">Email</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control mt-2"
+                        name="email"
+                        value="{{user.email}}"
+                        placeholder="Enter Your Email"
+                        readonly id="emailInput" onblur="validateEmail()"
+                        required
+                      />
+                    </div>
+             <label style="color:white;text-align:left;">Gender</label><br>
+
+                    <input type="text" value="{{ i.Gender}}"><br>
+             <label style="color:white;text-align:left;">Phone number</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control mt-2"
+                        value="{{user.username}}"
+                        name="PhoneNumber"
+
+                        placeholder="Enter Your Number"
+                        readonly id="numberInput" onblur="validateNumber()"
+                        required
+                      />
+                    </div>
+             <label style="color:white;text-align:left;">Date of birth</label>
+                <div class="form-group">
+
+                  <input
+
+                    class="form-control mt-2"
+                    name="DOB"
+                    placeholder="Date Of Birth"
+                    required
+                    readonly value="{{ i.DOB}}"
+                    max="2004-12-31"
+
+                  />
+                </div>
+                           <label style="color:white;text-align:left;">Address</label>
+                            <div class="form-group">
+                                <input
+                                  type="text"
+                                  class="form-control mt-2"
+                                  name="address"
+                                  placeholder="Address"
+                                  value="{{i.Address}}"
+                                 readonly
+                                />
+                              </div>
+
+
+        <div class="d-grid gap-2">
+            <a href="update_profile" class="btn btn-warning mt-2">Update Profile</a>
+        </div>
+
+    </div>
+
+  {% endfor %}
+  </div>
+</div>
+    </div>
+    </div>
+</div>
+<script>
+    function validateNumber() {
+      var numberInput = document.getElementById("numberInput");
+      var value = numberInput.value;
+
+      if (value === "0000000000" || value === "1111111111" || value === "2222222222" || value === "3333333333" || value === "4444444444" || value === "5555555555" || value === "6666666666" || value === "7777777777" || value ==="8888888888" || value ==="9999999999")
+      {
+        alert("Please enter a valid phone number");
+        numberInput.value = "";
+        return false;
+      }
+    }
+  </script>
+<script>
+    function validateEmail() {
+      var emailInput = document.getElementById("emailInput");
+      var email = emailInput.value;
+      var emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid Gmail address.");
+        emailInput.value = "";
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

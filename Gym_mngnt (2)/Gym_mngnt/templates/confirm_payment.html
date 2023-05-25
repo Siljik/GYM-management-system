@@ -1,0 +1,31 @@
+{%extends 'user_base.html' %}
+{% load static %}
+{% block body %}
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1> <span>.</span></h1>
+<!--          <h2>Join S.K Azwa Fitness </h2>-->
+        </div>
+      </div>
+
+      <div class="row">
+    
+        <h1>Confirm payment</h1>
+
+        <form method="post" action="checkout_session">
+            {% csrf_token %}
+    
+                <input type="submit" class="btn btn-success" value="pay">
+    
+        </form>
+      
+      
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+{% endblock %}
